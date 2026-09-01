@@ -1,6 +1,10 @@
 @api_poo_HostAddress = http://localhost:5027
 
-GET {{api_poo_HostAddress}}/weatherforecast/
+POST {{api_poo_HostAddress}}/Account
+Content-Type: application/json
 Accept: application/json
 
-###
+{
+"owner": "John Doe",
+"initialBalance": 1000.00
+}

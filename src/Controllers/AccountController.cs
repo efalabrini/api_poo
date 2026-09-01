@@ -1,23 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 namespace api_poo.Controllers;
+
+using System.Buffers;
 using api_poo.Entities;
+using api_poo.Models;
 
 [ApiController]
 [Route("[controller]")]
 public class AccountController : ControllerBase
 {
 
-    [HttpGet]
-    public string Get()
-    {
-        var lineOfCredit = new LineOfCreditAccount("line of credit", 100);
-        // How much is too much to borrow?
-        lineOfCredit.MakeWithdrawal(1000m, DateTime.Now, "Take out monthly advance");
-        lineOfCredit.MakeDeposit(50m, DateTime.Now, "Pay back small amount");
-        lineOfCredit.MakeWithdrawal(5000m, DateTime.Now, "Emergency funds for repairs");
-        lineOfCredit.MakeDeposit(150m, DateTime.Now, "Partial restoration on repairs");
-        lineOfCredit.PerformMonthEndTransactions();
-        return lineOfCredit.GetAccountHistory();
+    private static List<BankAccount> _accounts = [];
 
+
+    [HttpPost]
+    public ActionResult<BankAccountDto> Post([FromBody] PostAccountRequest prPostAccountRequest)
+    {
+
+        BankAccount new_bankAccount = new(prPostAccountRequest.Owner,prPostAccountRequest.InitialBalance);
+
+        _accounts.Add(new_bankAccount);
+
+        return BankAccountDto.Create(new_bankAccount);
+        
     }
+
 }
