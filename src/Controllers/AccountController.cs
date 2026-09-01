@@ -10,9 +10,14 @@ public class AccountController : ControllerBase
     [HttpGet]
     public string Get()
     {
-        var account = new BankAccount("Emiliano", 1000);
-        account.MakeWithdrawal(500, DateTime.Now, "Rent payment");
-        account.MakeDeposit(100, DateTime.Now, "Friend paid me back");
-        return $"Account {account.Number} was created for {account.Owner} with {account.Balance} initial balance.";
+        var lineOfCredit = new LineOfCreditAccount("line of credit", 100);
+        // How much is too much to borrow?
+        lineOfCredit.MakeWithdrawal(1000m, DateTime.Now, "Take out monthly advance");
+        lineOfCredit.MakeDeposit(50m, DateTime.Now, "Pay back small amount");
+        lineOfCredit.MakeWithdrawal(5000m, DateTime.Now, "Emergency funds for repairs");
+        lineOfCredit.MakeDeposit(150m, DateTime.Now, "Partial restoration on repairs");
+        lineOfCredit.PerformMonthEndTransactions();
+        return lineOfCredit.GetAccountHistory();
+
     }
 }
