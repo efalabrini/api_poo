@@ -1,8 +1,10 @@
 using System.Reflection.Metadata;
+using api_poo.Interfaces;
 using api_poo.Entities;
+
 namespace api_poo.Data;
 
-public class BankAccountRepository
+public class BankAccountRepository : IBankAccountRepository
 {
     private static List<BankAccount> _accounts = [];
 
@@ -27,7 +29,7 @@ public class BankAccountRepository
         throw new Exception("Not implemented");
     }
 
-    public void Detele(BankAccount entity)
+    public void Delete(BankAccount entity)
     {
         throw new Exception("Not implemented");
     }

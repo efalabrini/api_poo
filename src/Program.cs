@@ -1,10 +1,17 @@
+using api_poo.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using api_poo.Entities;
+using api_poo.Models;
+using api_poo.Data; 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// Registrar el servicio en el contenedor de IoC
+builder.Services.AddScoped<IBankAccountRepository, BankAccountRepository>();
 
 var app = builder.Build();
 
@@ -15,9 +22,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
