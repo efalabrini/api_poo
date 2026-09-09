@@ -1,8 +1,9 @@
 using System.Reflection.Metadata;
 using api_poo.Entities;
+using api_poo.Interfaces;
 namespace api_poo.Data;
 
-public class BankAccountRepository
+public class BankAccountRepository : IBankAccountRepository
 {
     private static List<BankAccount> _accounts = [];
 
