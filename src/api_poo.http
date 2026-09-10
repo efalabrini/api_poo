@@ -14,3 +14,9 @@ Accept: application/json
 GET {{api_poo_HostAddress}}/Account
 Content-Type: application/json
 Accept: application/json
+
+###
+
+GET {{api_poo_HostAddress}}/Account/1234567891
+Content-Type: application/json
+Accept: application/json

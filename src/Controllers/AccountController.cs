@@ -55,7 +55,14 @@ public class AccountController : ControllerBase
         
     }
 
-
+    [HttpGet("{prId}")]
+     public ActionResult<BankAccountDto> GetById([FromRoute] int prId)
+    {
+        var result =  _bankAccountRepository.GetById(prId);
+        
+        return BankAccountDto.Create(result);
+        
+    }
 
 
     // Fin de la clase AccountController.
