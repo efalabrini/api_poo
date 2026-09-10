@@ -1,9 +1,17 @@
 namespace api_poo.Entities;
 
+// La entidad representa una cuenta bancaria y contiene las reglas de negocio
+// relacionadas con depósitos, retiros y cálculo del saldo.
 public class BankAccount
 {
+   
     public string Number { get; }
+
+    
     public string Owner { get; set; }
+
+    // El saldo se calcula a partir de todas las transacciones, en lugar de
+    // almacenarse en una variable independiente que podría quedar desactualizada.
     public decimal Balance
     {
         get
@@ -18,9 +26,12 @@ public class BankAccount
         }
     }
 
+
     private static int s_accountNumberSeed = 1234567890;
 
+
     private List<Transaction> _allTransactions = new List<Transaction>();
+
 
     public void MakeDeposit(decimal amount, DateTime date, string note)
     {
@@ -32,6 +43,7 @@ public class BankAccount
         _allTransactions.Add(deposit);
     }
 
+   
     public void MakeWithdrawal(decimal amount, DateTime date, string note)
     {
         if (amount <= 0)
@@ -46,6 +58,8 @@ public class BankAccount
         _allTransactions.Add(withdrawal);
     }
 
+    // Este es el constructor de la clase. Se ejecuta al crear una cuenta con new.
+    // Recibe los datos mínimos necesarios y deja el objeto en un estado válido.
     public BankAccount(string name, decimal initialBalance)
     {
         Owner = name;
@@ -55,8 +69,10 @@ public class BankAccount
         s_accountNumberSeed++;
     }
 
+    // virtual permite que tipos de cuenta derivados redefinan esta operación.
     public virtual void PerformMonthEndTransactions() {}
 
+    // Construye un informe de texto recorriendo las transacciones en orden.
     public string GetAccountHistory()
     {
         var report = new System.Text.StringBuilder();
@@ -71,4 +87,6 @@ public class BankAccount
 
         return report.ToString();
     }
+
+    // Fin de la clase BankAccount.
 }
