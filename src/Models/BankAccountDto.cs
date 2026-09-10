@@ -22,5 +22,15 @@ public record BankAccountDto(string Number, string Owner)
         return dto;
     }
 
+    public static List<BankAccountDto> Create(IEnumerable<BankAccount> entities)
+    {
+        var listDto = new List<BankAccountDto>();
+        foreach (var entity in entities)
+        {
+            listDto.Add(Create(entity));
+        }
+        return listDto;
+    }
+
     // Fin del record BankAccountDto.
 }

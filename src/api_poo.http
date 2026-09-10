@@ -8,3 +8,9 @@ Accept: application/json
 "owner": "John Doe",
 "initialBalance": 1000.00
 }
+
+###
+
+GET {{api_poo_HostAddress}}/Account
+Content-Type: application/json
+Accept: application/json

@@ -6,28 +6,23 @@ using api_poo.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-// Inyección de dependencias: cuando una clase solicite IBankAccountRepository,
-// el contenedor creará y entregará un BankAccountRepository.
-// AddScoped significa que se usa una instancia por cada petición HTTP.
+// Registrar el servicio en el contenedor de IoC
 builder.Services.AddScoped<IBankAccountRepository, BankAccountRepository>();
-
 
 var app = builder.Build();
 
-
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-
 
 app.Run();

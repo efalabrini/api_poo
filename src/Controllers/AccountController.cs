@@ -44,5 +44,19 @@ public class AccountController : ControllerBase
         
     }
 
+    [HttpGet]
+     public ActionResult<List<BankAccountDto>> Get()
+    {
+
+        //List<BankAccount> result = _bankAccountRepository.List(); 
+        var result =  _bankAccountRepository.List();
+        
+        return BankAccountDto.Create(result);
+        
+    }
+
+
+
+
     // Fin de la clase AccountController.
 }
