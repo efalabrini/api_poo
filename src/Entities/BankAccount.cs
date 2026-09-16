@@ -1,14 +1,19 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace api_poo.Entities;
 
 // La entidad representa una cuenta bancaria y contiene las reglas de negocio
 // relacionadas con depósitos, retiros y cálculo del saldo.
 public class BankAccount
 {
-   
-    public string Number { get; }
+   [ Key ]
+    public string Number { get; set; }
 
     
     public string Owner { get; set; }
+
+    // Constructor sin parámetros para Entity Framework Core
+    public BankAccount() { }
 
     // El saldo se calcula a partir de todas las transacciones, en lugar de
     // almacenarse en una variable independiente que podría quedar desactualizada.
